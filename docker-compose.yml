@@ -2,8 +2,11 @@ version: '3.2'
 services:
   api:
     build:  .
+    command:  go run main.go
+    volumes:
+      - ./:/go/src/app
     ports:
-      - "1603:8080"
+      - 80:8080
     links:
       - db
       - admin
@@ -15,8 +18,8 @@ services:
       - 5432:5432
     environment:
       POSTGRES_PASSWORD:  Test1234
-    networks:
-      - default
+    links:
+      - admin
   admin:
     image: adminer:4.7.1
     ports:
