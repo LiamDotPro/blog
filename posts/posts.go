@@ -64,4 +64,8 @@ func getPost(c *gin.Context) {
 	var post Post
 
 	data.Connection.First(&post, postID)
+
+	c.JSON(200, gin.H{
+		"post": post,
+	})
 }
