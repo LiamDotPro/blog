@@ -1,0 +1,30 @@
+version: '3.2'
+services:
+  api:
+    build:  .
+    ports:
+      - "1603:8080"
+    links:
+      - db
+      - admin
+    networks:
+      - default
+  db:
+    image: postgres:11.1-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD:  Test1234
+    networks:
+      - default
+  admin:
+    image: adminer:4.7.1
+    ports:
+      - 8080:8080
+    networks:
+      - default
+networks:
+  default:
+   ipam:
+      config:
+      - subnet: 172.16.238.0/24
