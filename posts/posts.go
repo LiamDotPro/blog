@@ -2,21 +2,10 @@ package posts
 
 import (
 	"strconv"
-	"time"
 
-	data "github.com/choskyo/blog/data"
+	"github.com/choskyo/blog/data"
 	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
 )
-
-// Post ...
-type Post struct {
-	gorm.Model
-
-	Title     string
-	Body      string
-	Timestamp time.Time
-}
 
 // Setup initialises post routes + db table
 func Setup(router *gin.Engine) {
@@ -26,6 +15,8 @@ func Setup(router *gin.Engine) {
 	if !data.Connection.HasTable(Post{}) {
 		data.Connection.CreateTable(Post{})
 	}
+
+	data.Connection.AutoMigrate(&Post{})
 }
 
 func getPosts(c *gin.Context) {

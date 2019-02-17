@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/choskyo/blog/auth"
 	"github.com/choskyo/blog/data"
 	"github.com/choskyo/blog/posts"
+	"github.com/choskyo/blog/users"
 	"github.com/gin-gonic/gin"
 )
 
@@ -28,7 +30,10 @@ func main() {
 
 	data.Start()
 
+	// Initialise routes + migrate db
 	posts.Setup(router)
+	users.Setup(router)
+	auth.Setup(router)
 
 	if err := router.Run(":8080"); err != nil {
 		fmt.Fprintf(os.Stderr, "Error running server: %v", err)
