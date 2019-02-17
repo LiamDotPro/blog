@@ -13,6 +13,7 @@ type Post struct {
 
 	Title     string
 	Body      string
-	AuthorID  users.User
+	Author    users.User
+	AuthorID  int
 	Timestamp time.Time
 }

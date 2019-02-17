@@ -16,6 +16,14 @@ func Setup(router *gin.Engine) {
 
 	if !data.Connection.HasTable(User{}) {
 		data.Connection.CreateTable(User{})
+
+		hash, _ := bcrypt.GenerateFromPassword([]byte("password"), 4)
+
+		data.Connection.Create(&User{
+			Name:     "admin",
+			Password: string(hash),
+			Admin:    true,
+		})
 	}
 
 	data.Connection.AutoMigrate(&User{})
