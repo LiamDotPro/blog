@@ -81,6 +81,12 @@ func newUser(c *gin.Context) {
 		return
 	}
 
+	if validationErrors := validNewUser(nu); validationErrors != nil {
+		c.JSON(400, gin.H{
+			"errs": validationErrors,
+		})
+	}
+
 	if !data.Connection.First(&User{}, &User{Name: nu.Name}).RecordNotFound() {
 		c.JSON(400, gin.H{
 			"err": "Username taken",

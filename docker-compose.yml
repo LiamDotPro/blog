@@ -1,8 +1,8 @@
-version: '3.2'
+version: "3.2"
 services:
   api:
-    build:  .
-    command:  go run main.go
+    build: .
+    command: go run main.go
     volumes:
       - ./:/go/src/app
     ports:
@@ -17,7 +17,7 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_PASSWORD:  Test1234
+      POSTGRES_PASSWORD: Test1234
     links:
       - admin
   admin:
@@ -28,6 +28,6 @@ services:
       - default
 networks:
   default:
-   ipam:
+    ipam:
       config:
-      - subnet: 172.16.238.0/24
+        - subnet: 172.16.238.0/24
