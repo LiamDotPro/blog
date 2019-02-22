@@ -7,6 +7,8 @@ services:
       - ./:/go/src/app
     ports:
       - 1603:8080
+    environment:
+      SESSION_KEY: Test1234
     links:
       - db
       - admin
